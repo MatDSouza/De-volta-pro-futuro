@@ -1,0 +1,176 @@
+<!DOCTYPE >
+    <head>
+        <title>Quiz do futuro</title>
+        <meta charset="utf-8" />
+
+        <style>
+            body {
+                background: #121c21;
+                color: #fff;
+                font-family: sans-serif;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                height: 100vh;
+            } 
+            h1 {
+                text-align: center;
+                font-size: 24px;
+
+            }
+            button {
+                width: 100%;
+                margin-bottom: 20px;
+                font-size: 24px;
+                background: #121c21;
+                color: #fff;
+                text-align: left;
+                border: 4px solid;
+                border-image-slice: 1;
+                border-image-source: linear-gradient(
+                    0deg,
+                    #F7DC11 0%,
+                    #F0A81A 25%,
+                    #E4801D 50%,
+                    #D85116 75%,
+                    #B50D13 100%
+                ) ;
+                padding: 20px 15px;
+                cursor: pointer;
+            }
+
+            button:hover {
+                background: linear-gradient(
+                    0deg,
+                    #F7DC11 0%,
+                    #F0A81A 25%,
+                    #E4801D 50%,
+                    #D85116 75%,
+                    #B50D13 100%
+                );
+            }
+
+            p {
+                font-size: 24px;
+            }
+            .escondido {
+                display: none;
+            }
+        </style>
+    </head>
+
+    <body>
+        <img src="logo-quiz-do-futuro.png" />
+
+        <div class="pergunta-1" onclick="checarResposta(event)">
+            <h1>PARA TRABALHAR COM PROGRAMAÇÃO EU PRECISO:</h1>
+
+            <button>ser uma pessoa boa em matemática</button>
+            <button>Ter usado computadores desde crianca e jogar videogames</button>
+            <button class="opcao-certa">
+                Gostar de resolver problemas e trabalhar em equipe
+            </button>
+        </div>
+
+        <div class="pergunta-2 escondido" onclick="checarResposta(event)">
+            <h1>PARA TRABALHAR COM PROGRAMAÇÃO EU PRECISO: 2</h1>
+
+            <button>ser uma pessoa boa em matemática</button>
+            <button>Ter usado computadores desde crianca e jogar videogames</button>
+            <button class="opcao-certa">Gostar de resolver problemas e trabalhar em equipe</button>
+        </div>
+
+        <div class="pergunta-3 escondido"onclick="checarResposta(event)">
+            <h1>PARA TRABALHAR COM PROGRAMAÇÃO EU PRECISO: 3</h1>
+
+            <button>ser uma pessoa boa em matemática</button>
+            <button>Ter usado computadores desde crianca e jogar videogames</button>
+            <button class="opcao-certa">Gostar de resolver problemas e trabalhar em equipe</button>
+        </div>
+
+        <div class="pergunta-4 escondido"onclick="checarResposta(event)">
+            <h1>PARA TRABALHAR COM PROGRAMAÇÃO EU PRECISO: 4</h1>
+
+            <button>ser uma pessoa boa em matemática</button>
+            <button>Ter usado computadores desde crianca e jogar videogames</button>
+            <button class="opcao-certa">Gostar de resolver problemas e trabalhar em equipe</button>
+        </div>
+
+        <div class="pergunta-5 escondido"onclick="checarResposta(event)">
+            <h1>PARA TRABALHAR COM PROGRAMAÇÃO EU PRECISO: 5</h1>
+
+            <button>ser uma pessoa boa em matemática</button>
+            <button>Ter usado computadores desde crianca e jogar videogames</button>
+            <button class="opcao-certa">Gostar de resolver problemas e trabalhar em equipe</button>
+        </div>
+        <div class="resultado escondido">
+            <h1>PARABÉNS</h1>
+            <h1>VOCÊ ACERTOU <span class="acertos"></span> DE 5 PERGUNTAS</h1>
+            <button onclick="voltarParaOFuturo()">Voltar para o início</button>
+        </div>
+
+        <p>
+            <strong> <span class="pergunta-atual">1</span>/5</strong>
+        </p>
+
+        <script>
+            const ultimaPergunta = 5;
+            let quantidadeDeAcertos = 0;
+            let perguntaAtual = 1;
+
+            function checarResposta(event) {
+                const tagDoElemento = event.target.tagName;
+                if (tagDoElemento !== "BUTTON") {
+                    return;
+                }
+
+                const classeDoBotao = event.target.className;
+                const classeOpcaoCerta = "opcao-certa";
+
+                if (classeDoBotao === classeOpcaoCerta) {
+                    quantidadeDeAcertos++;
+                }
+
+                const divPerguntaAtual = document.querySelector(
+                    ".pergunta-" + perguntaAtual
+                );
+                divPerguntaAtual.classList.add("escondido");
+
+                perguntaAtual++;
+
+                if (perguntaAtual > ultimaPergunta){
+                    const divResultado = document.querySelector(".resultado");
+                    divResultado.classList.remove("escondido");
+
+                    const textoAcertos = document.querySelector(".acertos");
+                    textoAcertos.innerText = quantidadeDeAcertos;
+                    return;
+                }
+
+                const divProximaPergunta = document.querySelector(
+                    ".pergunta-" + perguntaAtual);
+                divProximaPergunta.classList.remove("escondido");
+                const textoPerguntaAtual = document.querySelector(".pergunta-atual")
+                textoPerguntaAtual.innerText = perguntaAtual;
+         
+            }
+            function voltarParaOFuturo() {
+                quantidadeDeAcertos = 0;
+                perguntaAtual = 1;
+
+                const divProximaPergunta = document.querySelector(
+                    ".pergunta-" + perguntaAtual
+                );
+                divProximaPergunta.classList.remove("escondido");
+                const textoPerguntaAtual = document.querySelector(".pergunta-atual")
+                textoPerguntaAtual.innerText = perguntaAtual;
+
+                const divResultado = document.querySelector(".resultado");
+                divResultado.classList.add("escondido");
+            }    
+        </script>
+    </body>
+</html>
